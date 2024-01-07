@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add Enquiry</title>
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container mt-3">
+		<!-- header_dashboard.html -->
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">Your Logo</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/home">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/addEnquiry">Add Enquiry</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/viewEnquirys">View Enquiry</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/login}">Log Out</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+	</div>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						Add Enquiry
+					</div>
+
+					<p th:text="${failure}" style="color:red ;text-align: center;"></p>
+					<p th:text="${success}" style="color:green ;text-align: center;"></p>
+
+					<div class="card-body">
+						<form id="addEnquiryForm" th:action="@{/addEnquiry}" th:object="${StudentEnqDTO}" method="post">
+							<input type="hidden" th:field="*{counsellorId}" th:value="${cid}" />
+
+							<div class="form-group">
+								<label for="name">Name</label>
+								<input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+									required>
+								<p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+								</p>
+							</div>
+							<div class="form-group">
+								<label for="phno">Phone Number</label>
+								<input type="tel" class="form-control" id="phno" name="phno" th:field="*{phno}"
+									required>
+								<p class="alert alert-danger" th:if="${#fields.hasErrors('phno')}" th:errors="*{phno}">
+								</p>
+							</div>
+							<div class="form-group">
+								<label for="mode">Mode</label>
+								<select class="form-control" id="mode" name="mode" th:field="*{mode}" >
+
+									<option value="Online">Online</option>
+									<option value="Offline">Offline</option>
+								</select>
+								<p class="alert alert-danger" th:if="${#fields.hasErrors('mode')}" th:errors="*{mode}">
+								</p>
+							</div>
+							<div class="form-group">
+								<label for="course">Course</label>
+								<select class="form-control" id="course" name="course" th:field="*{course}" >
+									<option value="">Select Course</option>
+									<option value="Web Development">Web Development</option>
+									<option value="Data Science">Data Science</option>
+									<option value="java">Java</option>
+									<option value="python">Python</option>
+									<!-- Add more courses as needed -->
+								</select>
+								<p class="alert alert-danger" th:if="${#fields.hasErrors('course')}"
+									th:errors="*{course}"></p>
+							</div>
+							<div class="form-group">
+								<label for="status">Status</label>
+								<select class="form-control" id="status" name="status" th:field="*{status}" >
+									<option value="">Select Status</option>
+									<option value="Interested">Interested</option>
+									<option value="Enrolled">Enrolled</option>
+									<option value="Lost">Lost</option>
+								</select>
+								<p class="alert alert-danger" th:if="${#fields.hasErrors('status')}"
+									th:errors="*{status}"></p>
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS and Popper.js CDN -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

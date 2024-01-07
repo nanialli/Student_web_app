@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>View Enquiries</title>
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container mt-3">
+		<!-- header_dashboard.html -->
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">Your Logo</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/home">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/addEnquiry">Add Enquiry</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/viewEnquirys">View Enquiry</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/login}">Log Out</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+	</div>
+
+	<!-- Search Form -->
+	<div class="row justify-content-center mt-3">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header">
+					Enquiry Search
+				</div>
+				<div class="card-body">
+					<form id="searchForm" th:object="${search}" th:action="@{search}" method="post">
+						<div class="form-group">
+							<label for="course">Course</label>
+							<select class="form-control" id="course" name="course" th:field="*{course}">
+								<option value="">Select Course</option>
+								<option value="Web Development">Web Development</option>
+								<option value="Data Science">Data Science</option>
+								<!-- Add more courses as needed -->
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="mode">Mode</label>
+							<select class="form-control" id="mode" name="mode" th:field="*{mode}">
+								<option value="">Select Mode</option>
+								<option value="Online">Online</option>
+								<option value="Offline">Offline</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="status">Status</label>
+							<select class="form-control" id="status" name="status" th:field="*{status}">
+								<option value="">Select Status</option>
+								<option value="Interested">Interested</option>
+								<option value="Enrolled">Enrolled</option>
+								<option value="Lost">Lost</option>
+							</select>
+						</div>
+						<input type="submit" class="btn btn-primary" value="Search"/>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<!-- Enquiry Table -->
+	<div class="container mt-3">
+		<div class="row justify-content-center">
+			<div class="col-md-10">
+				<div class="card">
+					<div class="card-header">
+						View Enquiries
+					</div>
+					<div class="card-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Phone Number</th>
+									<th>Mode</th>
+									<th>Course</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="e : ${enquirys}">
+									<td th:text="${e.name}"></td>
+									<td th:text="${e.phno}"></td>
+									<td th:text="${e.mode}"></td>
+									<td th:text="${e.course}"></td>
+									<td th:text="${e.status}"></td>
+								</tr>
+								<tr th:if="${#lists.isEmpty(enquirys)}">
+									<td colspan="5">No data available</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS and Popper.js CDN -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
